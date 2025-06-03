@@ -3,13 +3,17 @@
 }
 
 .App-logo {
+  margin-top: -5vh;
   height: 40vmin;
+  user-select: none;
+  position: absolute;
   pointer-events: none;
+  z-index: 1;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin 10s linear infinite;
   }
 }
 
@@ -19,9 +23,42 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+.App-header h1 {
+  margin-top: 16vh;
+  margin-bottom: 1vh;
+}
+.App-header input {
+  height: 2.4vh;
+  width: 20vw;
+}
+.App-header button {
+  height: 3.1vh;
+  width: 7vw;
+}
+.App-header div ul li button{
+  float: right;
+  margin-right: 10px;
+}
+.App-header div ul{
+  width: 25vw;
+  max-height: 60vmin;
+  overflow-y: scroll;
+}
+::-webkit-scrollbar {width: 10px;}
+::-webkit-scrollbar-track {background: #f1f1f1e1;}
+::-webkit-scrollbar-thumb {background: #888;}
+::-webkit-scrollbar-thumb:hover {background: #555;}
+
+.App-header div ul li{
+  text-align: left;
+}
+.App-header h1,form,div {
+  z-index: 2;
+  backdrop-filter: blur(1px);
+  border-radius: 5px;
 }
 
 .App-link {
@@ -29,10 +66,16 @@
 }
 
 @keyframes App-logo-spin {
-  from {
+  0% {
     transform: rotate(0deg);
+    height: 4vmin;
   }
-  to {
+  50% {
     transform: rotate(360deg);
+    height: 40vmin;
+  }
+  100% {
+    transform: rotate(0deg);
+    height: 4vmin;
   }
 }
