@@ -42,3 +42,4 @@ Kommentaren vor allem in App.js zu finden.
 ### Anstehende Aufgaben (Lernende)
 
 - Persistenz (mit Datenbank)
+- Validierung der Eingaben
