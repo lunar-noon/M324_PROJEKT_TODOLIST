@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,19 +33,19 @@ public class TaskController {
 
 	@CrossOrigin
 	@PostMapping
-	public String addTask(@RequestBody TaskDTO taskDTO) {
+	public ResponseEntity<TaskDTO> addTask(@RequestBody TaskDTO taskDTO) {
 		System.out.println("API EP '/tasks': '" + taskDTO.getTaskdescription() + "'");
 		Task t = new Task();
     t.setTaskdescription(taskDTO.getTaskdescription());
     taskRepository.save(t);
-    return "redirect:/";
+    return ResponseEntity.ok().body(taskDTO);
 	}
 
 	@CrossOrigin
 	@DeleteMapping("/{id}")
-	public String delTask(@RequestParam Long id) {
+	public ResponseEntity<Void> delTask(@RequestParam Long id) {
 		System.out.println("API EP '/delete': '" + id + "'");
     taskRepository.deleteById(id);
-		return "redirect:/";
+		return ResponseEntity.noContent().build();
 	}
 }
