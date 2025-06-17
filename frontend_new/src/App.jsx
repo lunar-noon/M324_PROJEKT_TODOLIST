@@ -54,7 +54,7 @@ function App() {
   ** In this case if the task with the unique taskdescription is found on the server, it will be removed from the list.
   */
   const handleDelete = (event, id) => {
-    console.log("Sending task description to delete on Spring-Server: "+taskdescription);
+    console.log("Sending task description to delete on Spring-Server: "+id);
     fetch(`http://localhost:8080/task/${id}`, { // API endpoint (the complete URL!) to delete an existing taskdescription in the list
       method: "DELETE",
       headers: {
@@ -78,7 +78,7 @@ function App() {
     return (
       <ul className="todo-list">
         {todos.map((todo, index) => (
-          <li key={todo.taskdescription}>
+          <li key={todo.id}>
             <span>{"Task " + (index+1) + ": "+ todo.taskdescription}</span>
             <button onClick={(event) => handleDelete(event, todo.id) }>&#10004;</button>
           </li>
