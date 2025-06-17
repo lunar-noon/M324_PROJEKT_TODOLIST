@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { act } from "react";
 import '@testing-library/jest-dom';
 import App from '../src/App';
 
@@ -12,7 +13,7 @@ test('renders ToDo Liste title', async () => {
     { id: 2, taskdescription: 'Item 2' }
   ]));
 
-  render(<App />);
+  await act(async () => { render(<App />);})
 
   const linkElement = await screen.findByText(/Item 1/i);
   expect(linkElement).toBeInTheDocument();

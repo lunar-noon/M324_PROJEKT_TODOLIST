@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class TastTest {
+public class TaskTest {
 
   /**
    * test for setter and getter of taskdescription attribute
