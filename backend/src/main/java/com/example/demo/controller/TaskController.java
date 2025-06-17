@@ -34,7 +34,7 @@ public class TaskController {
 	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<TaskDTO> addTask(@RequestBody TaskDTO taskDTO) {
-		System.out.println("API EP '/tasks': '" + taskDTO.getTaskdescription() + "'");
+		System.out.println("API EP '/task': '" + taskDTO.getTaskdescription() + "'");
 		Task t = new Task();
     t.setTaskdescription(taskDTO.getTaskdescription());
     taskRepository.save(t);
