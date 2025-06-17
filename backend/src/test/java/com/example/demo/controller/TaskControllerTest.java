@@ -81,4 +81,50 @@ public class TaskControllerTest {
       e.printStackTrace();
     }
   }
+
+  
+  @Test
+  @Transactional
+  void testUpdateTask() {
+    final String originalTask = "original task";
+    final String updatedTask = "updated task";
+    JSONObject t = new JSONObject();
+    try {
+      // Task anlegen
+      t.put("taskdescription", originalTask);
+      mockMvc.perform(MockMvcRequestBuilders.post("/task")
+          .content(t.toString())
+          .contentType(MediaType.APPLICATION_JSON)
+          .characterEncoding("utf-8"))
+          .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+
+      // Alle Tasks abrufen, um die ID zu bekommen
+      String response = mockMvc.perform(MockMvcRequestBuilders.get("/task"))
+          .andExpect(MockMvcResultMatchers.status().isOk())
+          .andReturn().getResponse().getContentAsString();
+
+      // ID der ersten Task extrahieren
+      org.json.JSONArray arr = new org.json.JSONArray(response);
+      Long id = arr.getJSONObject(0).getLong("id");
+
+      // Task updaten
+      JSONObject updated = new JSONObject();
+      updated.put("taskdescription", updatedTask);
+
+      mockMvc.perform(MockMvcRequestBuilders.put("/task/" + id)
+          .content(updated.toString())
+          .contentType(MediaType.APPLICATION_JSON)
+          .characterEncoding("utf-8"))
+          .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+
+      // Prüfen, ob das Update übernommen wurde
+      mockMvc.perform(MockMvcRequestBuilders.get("/task"))
+          .andExpect(MockMvcResultMatchers.status().isOk())
+          .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString(updatedTask)))
+          .andExpect(MockMvcResultMatchers.content().string(Matchers.not(Matchers.containsString(originalTask))));
+    } catch (Exception e) {
+      fail("test failed because " + e.getMessage());
+      e.printStackTrace();
+    }
+  }
 }
