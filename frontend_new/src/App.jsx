@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import TaskList from './components/TaskList';
+import TaskForm from './components/TaskForm';
 import logo from './assets/react.svg'
 import './App.css'
 
@@ -78,10 +80,7 @@ function App() {
     return (
       <ul className="todo-list">
         {todos.map((todo, index) => (
-          <li key={todo.id}>
-            <span>{"Task " + (index+1) + ": "+ todo.taskdescription}</span>
-            <button onClick={(event) => handleDelete(event, todo.id) }>&#10004;</button>
-          </li>
+          <TaskEntry key={todo.id} todo={todo} index={index} handleDelete={handleDelete} />
         ))}
       </ul>
     );
@@ -94,18 +93,12 @@ function App() {
         <h1>
           ToDo Liste
         </h1>
-        <form onSubmit={handleSubmit} className='todo-form'>
-          <label htmlFor="taskdescription">Neues Todo anlegen:</label>
-          <input
-            type="text"
-            value={taskdescription}
-            onChange={handleChange}
-          />
-          <button type="submit">Absenden</button>
-        </form>
-        <div>
-          {renderTasks(todos)}
-        </div>
+        <TaskForm
+          taskdescription={taskdescription}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+        <TaskList todos={todos} handleDelete={handleDelete} />
       </header>
     </div>
   );
