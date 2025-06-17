@@ -24,7 +24,10 @@ function App() {
     .then(response => {
       console.log("Receiving answer after sending to Spring-Server: ");
       console.log(response);
-      window.location.href = "/";
+      return response.json();
+    })
+    .then(newTodo => {
+      setTodos(prev => [...prev, newTodo]);
       setTaskdescription("");             // clear input field, preparing it for the next input
     })
     .catch(error => console.log(error))
@@ -66,7 +69,7 @@ function App() {
     .then(response => {
       console.log("Receiving answer after deleting on Spring-Server: ");
       console.log(response);
-      window.location.href = "/";
+      setTodos(prev => prev.filter(todo => todo.id !== id));
     })
     .catch(error => console.log(error))
   }
