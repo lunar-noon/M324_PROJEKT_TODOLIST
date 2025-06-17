@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Task;
+import com.example.demo.controller.DTO.TaskDTO;
 import com.example.demo.repository.TaskRepository;
 
 @RestController
@@ -31,10 +32,10 @@ public class TaskController {
 
 	@CrossOrigin
 	@PostMapping
-	public String addTask(@RequestBody String taskdescription) {
-		System.out.println("API EP '/tasks': '" + taskdescription + "'");
+	public String addTask(@RequestBody TaskDTO taskDTO) {
+		System.out.println("API EP '/tasks': '" + taskDTO.getTaskdescription() + "'");
 		Task t = new Task();
-    t.setTaskdescription(taskdescription);
+    t.setTaskdescription(taskDTO.getTaskdescription());
     taskRepository.save(t);
     return "redirect:/";
 	}
