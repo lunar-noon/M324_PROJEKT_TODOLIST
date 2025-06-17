@@ -75,13 +75,47 @@
     </dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+<build>
+  <plugins>
+
+    <!-- Tests & JUnit-XML -->
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <version>3.2.5</version>
+      <!-- weitere Konfiguration i. d. R. nicht nötig -->
+    </plugin>
+
+    <!-- HTML-Bericht -->
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-surefire-report-plugin</artifactId>
+      <version>3.2.5</version>
+      <executions>
+        <execution>
+          <id>unit-test-report</id>
+          <phase>verify</phase>
+          <goals><goal>report-only</goal></goals>
+        </execution>
+      </executions>
+    </plugin>
+
+    <!-- (optional) Compiler auf Java 21 fixieren -->
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.11.0</version>
+      <configuration><release>21</release></configuration>
+    </plugin>
+
+    <!-- Spring Boot -->
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+    </plugin>
+
+  </plugins>
+</build>
+
 
 </project>
