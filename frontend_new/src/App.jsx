@@ -6,7 +6,7 @@ import './App.css'
 
 
 
-const API_URL = import.meta.env.VITE_API_URL || "http://backend:8080"; // API endpoint for the tasks
+const API_URL = process.env.VITE_API_URL || "http://backend:8080"; // API endpoint for the tasks
 const URL = API_URL + "/task"; // URL to fetch tasks from the API
 
 function App() {
