@@ -1,0 +1,42 @@
+services:
+  frontend:
+    build:
+      context: ./frontend_new
+      args:
+      - VITE_API_URL=http://backend:8080
+    ports:
+      - '3000:80'
+    depends_on:
+      - backend
+    networks:
+      - wiss_todo
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      MYSQL_HOST: db
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    networks:
+      - wiss_todo
+
+  db:
+    build:
+      context: ./backend/db
+    environment:
+      MYSQL_ROOT_PASSWORD: demo
+    ports:
+      - '3306:3306'
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wiss_todo
+
+volumes:
+  db_data:
+
+networks:
+  wiss_todo:
